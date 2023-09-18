@@ -6531,7 +6531,7 @@ S2.define('select2/selection/stopPropagation',[
         // AMD. Register as an anonymous module.
         S2.define('jquery-mousewheel',['jquery'], factory);
     } else if (typeof exports === 'object') {
-        // Node/CommonJS css for Browserify
+        // Node/CommonJS style for Browserify
         module.exports = factory;
     } else {
         // Browser globals

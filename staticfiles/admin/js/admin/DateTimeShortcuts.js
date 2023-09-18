@@ -90,9 +90,10 @@
             }
             message = interpolate(message, [timezoneOffset]);
 
-            const warning = document.createElement('div');
-            warning.classList.add('help', warningClass);
+            const warning = document.createElement('span');
+            warning.className = warningClass;
             warning.textContent = message;
+            inp.parentNode.appendChild(document.createElement('br'));
             inp.parentNode.appendChild(warning);
         },
         // Add clock widget to a given field
@@ -196,7 +197,7 @@
                 clock_box.style.left = findPosX(clock_link) + 17 + 'px';
             }
             else {
-                // since css's width is in em, it'd be tough to calculate
+                // since style's width is in em, it'd be tough to calculate
                 // px value of it. let's use an estimated px for now
                 clock_box.style.left = findPosX(clock_link) - 110 + 'px';
             }
@@ -367,7 +368,7 @@
                 cal_box.style.left = findPosX(cal_link) + 17 + 'px';
             }
             else {
-                // since css's width is in em, it'd be tough to calculate
+                // since style's width is in em, it'd be tough to calculate
                 // px value of it. let's use an estimated px for now
                 cal_box.style.left = findPosX(cal_link) - 180 + 'px';
             }
@@ -387,7 +388,13 @@
             DateTimeShortcuts.calendars[num].drawNextMonth();
         },
         handleCalendarCallback: function(num) {
-            const format = get_format('DATE_INPUT_FORMATS')[0];
+            let format = get_format('DATE_INPUT_FORMATS')[0];
+            // the format needs to be escaped a little
+            format = format.replace('\\', '\\\\')
+                .replace('\r', '\\r')
+                .replace('\n', '\\n')
+                .replace('\t', '\\t')
+                .replace("'", "\\'");
             return function(y, m, d) {
                 DateTimeShortcuts.calendarInputs[num].value = new Date(y, m - 1, d).strftime(format);
                 DateTimeShortcuts.calendarInputs[num].focus();

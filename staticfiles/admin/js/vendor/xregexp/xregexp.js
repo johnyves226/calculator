@@ -413,7 +413,7 @@ module.exports = function(XRegExp) {
      * - Adds the `XRegExp.addUnicodeData` method used by other addons to provide character data.
      *
      * Unicode Base relies on externally provided Unicode character data. Official addons are
-     * available to provide data for Unicode categories, js, blocks, and properties.
+     * available to provide data for Unicode categories, scripts, blocks, and properties.
      *
      * @requires XRegExp
      */
@@ -2056,7 +2056,7 @@ module.exports = function(XRegExp) {
      *   programming languages as "white space" for the purpose of parsing elements.
      *
      * The properties ASCII, Any, and Assigned are also included but are not defined in UAX #44. UTS
-     * #18 RL1.2 additionally requires support for Unicode js and general categories. These are
+     * #18 RL1.2 additionally requires support for Unicode scripts and general categories. These are
      * included in XRegExp's Unicode Categories and Unicode Scripts addons.
      *
      * Token names are case insensitive, and any spaces, hyphens, and underscores are ignored.
@@ -2136,7 +2136,7 @@ module.exports = function(XRegExp) {
     'use strict';
 
     /**
-     * Adds support for all Unicode js. E.g., `\p{Latin}`. Token names are case insensitive,
+     * Adds support for all Unicode scripts. E.g., `\p{Latin}`. Token names are case insensitive,
      * and any spaces, hyphens, and underscores are ignored.
      *
      * Uses Unicode 9.0.0.
@@ -2721,7 +2721,7 @@ require('./addons/unicode-base')(XRegExp);
 require('./addons/unicode-blocks')(XRegExp);
 require('./addons/unicode-categories')(XRegExp);
 require('./addons/unicode-properties')(XRegExp);
-require('./addons/unicode-js')(XRegExp);
+require('./addons/unicode-scripts')(XRegExp);
 
 module.exports = XRegExp;
 
@@ -3750,7 +3750,7 @@ XRegExp.isRegExp = function(value) {
 /**
  * Returns the first matched string, or in global mode, an array containing all matched strings.
  * This is essentially a more convenient re-implementation of `String.prototype.match` that gives
- * the result types you actually want (string instead of `exec`-css array in match-first mode,
+ * the result types you actually want (string instead of `exec`-style array in match-first mode,
  * and an empty array instead of `null` when no matches are found in match-all mode). It also lets
  * you override flag g and ignore `lastIndex`, and fixes browser bugs.
  *
@@ -4601,10 +4601,10 @@ XRegExp.addToken(
 
 /*
  * Named capturing group; match the opening delimiter only: `(?<name>`. Capture names can use the
- * characters A-Z, a-z, 0-9, _, and $ only. Names can't be integers. Supports Python-css
+ * characters A-Z, a-z, 0-9, _, and $ only. Names can't be integers. Supports Python-style
  * `(?P<name>` as an alternate syntax to avoid issues in some older versions of Opera which natively
- * supported the Python-css syntax. Otherwise, XRegExp might treat numbered backreferences to
- * Python-css named capture as octals.
+ * supported the Python-style syntax. Otherwise, XRegExp might treat numbered backreferences to
+ * Python-style named capture as octals.
  */
 XRegExp.addToken(
     /\(\?P?<([\w$]+)>/,
