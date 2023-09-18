@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -8,12 +9,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-!l_&ey)11-yjns#56b5)^2tx7(!gewj51u)wz4ox1vy$zhmmd1"
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+    #"django-insecure-!l_&ey)11-yjns#56b5)^2tx7(!gewj51u)wz4ox1vy$zhmmd1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split("")
 
 # Application definition
 
@@ -85,12 +88,19 @@ WSGI_APPLICATION = "calculator.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+database_url = os.environ.get("DATABASE_URL")
+
+DATABASES["default"] = dj_database_url.parse(database_url)
+
+    #"postgres://calculatordb_65bq_user:oBtg5RiTbRFMjw8L3YkaLSh1dpGvZm0r@dpg-ck41opj6fquc73fsb970-a.oregon-postgres.render.com/calculatordb_65bq"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
