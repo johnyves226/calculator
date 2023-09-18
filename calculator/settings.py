@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'contact',
     'specialities',
-    "django_browser_reload",
+   # "django_browser_reload",
     'user',
 ]
 
