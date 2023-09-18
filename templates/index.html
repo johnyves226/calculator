@@ -1,0 +1,338 @@
+{% extends 'head.html' %}
+{% load widget_tweaks %}
+{% load static %}
+ {% block content %}
+
+    <main role="main">
+        <div>
+            <div class="main">
+            <div class="row">
+                <div class="col-6">
+                    <div class="text-center">
+                        <h2 class="first-text">Calculer la rentabilité de Loktore pour votre pratique</h1>
+
+                        <h3 class="second-text">Découvrez gratuitement le gain de temps et les revenus additionnels que loktoré peut vous apporter</h3>
+
+                        <div class="form-group">
+                            <label class="bold-label">Veuillez sélectionner votre spécialité</label>
+                            <div class="select">
+                            <select class="" id="specialityInput" style="width: 100%">
+                                <option value="default">Sélectionnez une option</option>
+                            </select>
+                        </div>
+                        </div>
+                    </div>  <!-- toute la partie apres selection -->
+                    <div id="texteDiv" style="display: none;"><!-- get new patient -->
+                        <fieldset class="field" >
+                            <label class="bold-label">
+                                Combien de consultations réalisez-vous en moyenne par semaine?
+                            </label>
+                            <div class="range-container">
+                                <div class="range-wrap">
+                                    <div class="input-ovj" id="spanContainer">
+                                    </div>
+                                    <input type="range" id="champRange" min="0" max="100" class="range" step="1" name="range" list="tickmarks">
+                                    <output for="range" onforminput="value = range.valueAsNumber;"></output>
+                                    <span class="bubble" id="valeurRange"></span>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="bold-label">
+                                    Quel est le montant moyen de votre consultation?                                    </label>
+                                <div class="">
+                                    <input id="CF" type="number" name="averageGKV" class="currency" name="currency-field"  pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$">
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="field" id="tchampRangeOuiNon">
+                            <label class="bold-label">
+                                Combien de rendez-vous non honorés observez-vous par semaine ?
+                            </label>
+                                <p id="NbA-nr">La solution Loktoré permet de réduire de 60% le nombre de rendez-vous non honorés.</p>
+                            <div class="range-container">
+                                <div class="inp">
+                                </div>
+                                <div class="nbarange-wrap">
+                                    <div class="input-ovj1" id="spanContainer">
+                                    </div>
+                                    <input type="range" id="NbA-range" min="0" max="25" step="1"  class="NbA-range" name="NbA-range">
+                                    <output for="NbA-range" onforminput="value = NbA-range.valueAsNumber;"></output>
+                                    <span class="nbabubble" id="NbA-vrange"></span>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <!-- Prise de rdv online -->
+                       <fieldset class="">
+                                <label class="bold-label">
+                                    Souhaitez-vous optimiser votre temps de travail et simplifier le suivi de vos patients grâce à la prise de RDV en ligne?
+                                </label>
+                            <div class="question">
+                                <label class="btn" >
+                                    <input class="input"  type="radio" name="RDVchoice" id="RDoui" value="oui" checked >
+                                    <span>Oui</span>
+                                </label>
+                                <label class="btn">
+                                    <input type="radio"  class="input" name="RDVchoice" id="RDnon" value="non">
+                                    <span>Non</span>
+                                </label>
+                            </div>
+                            <div id="rdv-o">
+                                <div class="field" >
+                                    <label class="bold-label">
+                                        Combien de nouveaux patients souhaitez-vous accueillir par semaine grâce à la prise de RDV en ligne ?
+                                    </label>
+                                    <p id="message-RDVO"></p>
+                                    <div class="range-container">
+                                        <div class="rdvorange-wrap">
+                                            <div class="input-ovj2" id="spanContainer">
+                                            </div>
+                                            <input type="range" id="Range-RDVO" min="0" max="100" step="1"  class="rdvorange" name="rdvorange">
+                                            <output for="rdvorange" onforminput="value = rdvorange.valueAsNumber;"></output>
+                                            <span class="rdvobubble" id="valeurRange-RDVO"></span>
+                                        </div>
+                                    </div>
+                                    <div class="field" >
+                                        <label class="bold-label">
+                                            Quel est le temps moyen que vous estimer gagner par prise de RDV en ligne?
+                                        </label>
+                                        <p class="">
+                                            La solution de prise de RDV en ligne de Loktoré vous permet de gagner en moyenne 30 min par Prise de RDV en ligne
+                                        </p>
+                                        <div class="input">
+                                        </div>
+                                        <div class="minuterange-wrap">
+                                            <div class="input-ovj3" id="spanContainer">
+                                            </div>
+                                            <input type="range" id="minute" min="0" max="100" step="1"  class="minuterange" name="minuterange" >
+                                            <output for="minuterange" onforminput="value = minuterange.valueAsNumber;"></output>
+                                            <span class="minutebubble" id="minutevaleurRange"></span>
+                                        </div>
+                                    </div>
+                                    <div class="field" >
+                                        <label class="bold-label">
+                                            Quel temps moyen évaluez-vous que vos patients gagnent en optant pour la solution de prise de rendez-vous en ligne ?
+                                        </label>
+                                        <p class="">
+                                            La solution de prise de RDV en ligne de Loktoré permet à vos patients de gagner en moyenne 2 heures par prise de RDV en ligne
+                                        </p>
+                                        <div class="input-">
+                                        </div>
+                                        <div class="hourrange-wrap">
+                                            <div class="input-ovj4" id="spanContainer">
+                                            </div>
+                                            <input type="range" id="hour" min="0" max="12" step="1"  class="hourrange" name="hourrange">
+                                            <output for="hourrange" onforminput="value = hourrange.valueAsNumber;"></output>
+                                            <span class="hourbubble" id="hourvaleurRange"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <!-- teleconsultation -->
+                        <fieldset class="">
+                            <div>
+                                <label class="bold-label">
+                                    Souhaitez-vous simplifier le suivi de vos patients en optant pour la téléconsultation?
+                                </label>
+                            </div>
+                            <div class="question">
+                                <label class="btn" >
+                                    <input class="input"  type="radio" name="choice" id="toui" value="oui" checked >
+                                    <span>Oui</span>
+                                </label>
+                                <label class=" btn">
+                                    <input type="radio"  class="input" name="choice" id="tnon" value="non">
+                                    <span>Non</span>
+                                </label>
+                            </div>
+                            <div id="tlcf">
+                                <div class="field" >
+                                    <label class="bold-label">
+                                        Combien de nouveaux patients souhaitez-vous accueillir par semaine grâce à la téléconsultation?
+                                    </label>
+                                    <p id="nbrtlc"></p>
+                                    <div>
+                                    <div class="input-o">
+                                    </div>
+                                        <div class="tlcrange-wrap">
+                                            <div class="input-ovj5" id="spanContainer">
+                                            </div>
+                                            <input type="range" id="range-tlc" min="0" max="100" step="1"  name="tlcrange" class="tlcrange" >
+                                            <output for="tlcrange" onforminput="value = tlcrange.valueAsNumber;"></output>
+                                            <span id="vrange-tlc" class="tlcbubble"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <label class="bold-label">
+                                        Quel est le montant moyen des honoraires de votre téléconsultation ?
+                                    </label>
+                                    <p id="fctlc"></p>
+                                    <div class="">
+                                        <input id="tlc-f" type="number" name="Hv-F" class="currency">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+
+                        <!-- home visite -->
+                        <fieldset class="">
+                            <div class="">
+                                <label class="bold-label">
+                                    Souhaitez-vous simplifier le suivi de vos patients grâce aux consultations à domicile?
+                                </label>
+                            </div>
+                            <div class="question">
+                                <label class="btn" >
+                                    <input class="input"  type="radio" name="Hchoice" id="Houi" value="oui" checked >
+                                    <span>Oui</span>
+                                </label>
+                                <label class=" btn">
+                                    <input type="radio"  class="input" name="Hchoice" id="Hnon" value="non">
+                                    <span>Non</span>
+                                </label>
+                            </div>
+                            <div id="homeviste">
+                                <div class="field" >
+                                    <label class="bold-label">
+                                        Combien de nouveaux patients souhaitez-vous accueillir par semaine grâce à la consultation à domicile?
+                                    </label>
+                                    <p id="message-HV"></p>
+                                    <div class="range-container">
+                                        <div class="input-ov">
+                                        </div>
+                                        <div class="hvrange-wrap">
+                                            <div class="input-ovj6" id="spanContainer">
+                                            </div>
+                                            <input type="range" id="Range-Hv" min="0" max="100" step="1" name="hv-range" class="hv-range">
+                                            <output for="hv-range" onforminput="value = hv-range.valueAsNumber;"></output>
+                                            <span class="hvbubble" id="valeurRange-Hv"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="bold-label">
+                                        Quel est le montant moyen des honoraires de votre consultation à domicile ?
+                                    </label>
+                                    <p id="message-HVf"></p>
+                                    <div class="">
+                                        <input id="Hv-F" type="number" name="Hv-F" class="currency" >
+                                    </div>
+                                </div>
+                                <div><p></p> <p></p> <p></p></div>
+                                <div class="field">
+                                    <label class="bold-label">
+                                        Quel est le montant moyen des honoraires de votre deplacement pour une consultation à domicile ?
+                                    </label>
+                                    <p id="message-HVfa"></p>
+                                    <div class="">
+                                        <input id="Hva-F" type="number" name="Hva-F" class="currency" >
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+
+                <div class="col-6">
+                    <div id="texteDive">
+                        <div class="polaroid">
+                            <div class="img-container" >
+                                <img class="m-img" src="{% static "img/health.jpg" %}" alt="">
+                            </div>
+                            <hr>
+                            <lable class="center">
+                                Estimation mensuelle de votre rentabilité moyenne grâce à Loktoré
+                            </lable>
+                            <hr>
+                            <div class="space">
+                                <p id="gainTotal" class="total"></p>
+                                <p class="text"> supplémentaires au total grâce aux services proposés par Loktoré</p>
+                            </div>
+                            <div class="space">
+                                <p id="gainPTotal"></p>
+                                <p class="text"> patiens supplémentaires grâce aux services de Loktoré</p>
+                            </div>
+                            <div class="space">
+                                <p id="gainTMTotal">/p>
+                                <p class="text">que vous avez réussi à économiser</p>
+                                <p class="ttext">en reduisant les temps d'attente et les tâches administratives grâce à Loktoré</p>
+                            </div>
+                            <div class="space">
+                                <p id="gainTPTotal">/p>
+                                <p class="text">que vous avez réussi à faire économiser à vos patients</p>
+                                <p class="ttext">en réduisant les appels et les déplacements grâce à Loktoré</p>
+                            </div>
+                            <hr>
+                            <div class="chart-wrapper"  >
+                                <canvas id="myChart"></canvas>
+                            </div>
+                            <hr>
+                            <div class="message">
+                                <div class="home">
+                                    <p class="datardvh" id="datardvh"></p>
+                                    <p class="tmessage" id="message-rdvh"> </p>
+                                </div>
+                                <div class="rdvol" >
+                                    <p  class="data-tele" id="data-rdvol"></p>
+                                    <p class="tmessage" id="message-rdvol"> </p>
+                                </div>
+                                <div class="tele">
+                                    <p class="data-home" id="data-tele"></p>
+                                    <p class="tmessage" id="message-tele"> </p>
+                                </div>
+                                <div class="rdvh">
+                                    <p class="data-rdvol" id="data-home"></p>
+                                    <p class="tmessage" id="message-home"> </p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div>
+                                <div>
+
+                                </div>
+
+                                <div>
+                                    <button id="create-contact" class="btn btn-primary" type="button" name="button">Nous contacter</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+            <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content"></div>
+                </div>
+            </div>
+    </main>
+
+     <!-- FOOTER -->
+
+
+{% endblock content %}
+
+
+<script  type="text/javascript">
+
+
+// BS4
+$(document).ready(function() {
+    $("#create-contact").modalForm({
+        formURL: "{% url 'create_contact' %}"
+    });
+});
+
+// BS5
+document.addEventListener('DOMContentLoaded', (e) => {
+  modalForm(document.getElementById('create-contact'), {
+    formURL: "{% url 'create_contact' %}"
+  })
+});
+
+</script>
