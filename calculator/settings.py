@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'corsheaders',
-    'reactpy_django',
+    #'reactpy_django',
     'bootstrap_modal_forms',
     'widget_tweaks',
     'crispy_forms',

@@ -3,7 +3,6 @@ psycopg2-binary==2.9.7
 psycopg2==2.9.7
 asgiref==3.7.2
 django-jazzmin
-reactpy-django
 channels[daphne]
 bootstrap4
 django-phonenumber-field
